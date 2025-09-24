@@ -1,3 +1,4 @@
+// src/components/Features.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
 
@@ -35,49 +36,122 @@ const Features = () => {
     },
   ];
 
+  // Motion variants for consistent animation
+  const container = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i = 1) => ({
+      opacity: 1,
+      y: 0,
+      transition: { staggerChildren: 0.06, delayChildren: 0.04 * i },
+    }),
+  };
+
+  const cardVariant = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.45 } },
+  };
+
   return (
-    <section id="features" className="py-16 sm:py-20 bg-white dark:bg-slate-900">
+    <section
+      id="features"
+      className="py-16 sm:py-20 section transition-colors duration-300 dark:bg-slate-900"
+      aria-label="A2Key features section"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
+          variants={container}
+          custom={0}
           className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            Why choose
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-indigo-600">
-              {' '}A2Key?
+          <motion.h2
+            variants={cardVariant}
+            className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight mb-4 text-gray-900 dark:text-gray-100"
+          >
+            Why choose{' '}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-violet-600 to-indigo-600 dark:from-violet-300 dark:to-cyan-300">
+              A2Key?
             </span>
-          </h2>
-          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Powerful features designed to help you build, manage, and grow your online store with confidence.
-          </p>
+          </motion.h2>
+
+          <motion.p
+            variants={cardVariant}
+            className="mx-auto text-base sm:text-lg max-w-3xl text-gray-700 dark:text-gray-300"
+            style={{ opacity: 0.78 }}
+          >
+            Powerful, secure, and reliable delivery tools built for marketplaces,
+            resellers, and SaaS sellers — designed to reduce friction and increase
+            conversions.
+          </motion.p>
         </motion.div>
 
         {/* Features Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={container}
+          custom={1}
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+        >
           {features.map((feature, index) => (
-            <motion.div
+            <motion.article
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -5 }}
-              className="group bg-gray-50 dark:bg-slate-800 p-6 sm:p-8 rounded-2xl hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-slate-700 hover:border-violet-200 dark:hover:border-violet-700"
+              role="article"
+              aria-labelledby={`feature-${index}-title`}
+              tabIndex={0}
+              variants={cardVariant}
+              whileHover={{ y: -6, boxShadow: '0 10px 30px rgba(59, 53, 95, 0.08)' }}
+              className="group card bg-white dark:bg-gradient-to-br dark:from-gray-900 dark:to-slate-800 p-6 sm:p-8 rounded-2xl border border-gray-100 dark:border-gray-800 transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-violet-100 dark:focus:ring-violet-900/40"
             >
-              <h3 className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-3">
-                {feature.title}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm sm:text-base">
-                {feature.description}
-              </p>
-            </motion.div>
+              <div className="flex items-start gap-4">
+                <div className="flex-none h-12 w-12 rounded-lg bg-gradient-to-br from-violet-50 to-indigo-50 dark:from-violet-700 dark:to-indigo-700 flex items-center justify-center text-2xl">
+                  <span aria-hidden="true" className="text-violet-700 dark:text-white">
+                    {feature.title.split(' ')[0]}
+                  </span>
+                </div>
+
+                <div className="min-w-0">
+                  <h3
+                    id={`feature-${index}-title`}
+                    className="text-lg sm:text-xl font-semibold text-gray-900 dark:text-gray-100 mb-1"
+                  >
+                    {feature.title.replace(/^[^\s]+/, '').trim() || feature.title}
+                  </h3>
+                  <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed" style={{ opacity: 0.9 }}>
+                    {feature.description}
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-4 flex items-center justify-between text-xs text-gray-400 dark:text-gray-400">
+                <span className="dark:text-gray-300">Reliable · Scalable · Secure</span>
+                <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  Trusted by top resellers
+                </span>
+              </div>
+            </motion.article>
           ))}
-        </div>
+        </motion.div>
+
+        {/* Optional CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-12 sm:mt-16 text-center"
+        >
+          <a
+            href="#pricing"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm shadow hover:shadow-lg transition-shadow duration-200 bg-gradient-to-r from-violet-600 to-indigo-600 dark:from-violet-500 dark:to-indigo-400 text-white"
+            aria-label="See pricing"
+          >
+            See pricing & plans
+          </a>
+        </motion.div>
       </div>
     </section>
   );

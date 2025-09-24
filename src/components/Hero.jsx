@@ -11,7 +11,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative bg-gradient-to-br from-violet-50 via-white to-indigo-50 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900 py-12 lg:py-32 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-blue-100 via-blue-200 to-blue-300 dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900 py-12 lg:py-32 overflow-hidden">
       <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
