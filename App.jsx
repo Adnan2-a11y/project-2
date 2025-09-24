@@ -7,12 +7,12 @@ import SubscribePanel from "./src/components/SubscribePanel.jsx";
 import Footer from "./src/components/Footer.jsx";
 
 import Home from "./src/pages/Home.jsx";
-import HowItWorks from "./src/pages/HowItWorks.jsx";
-import Features from "./src/pages/Features.jsx";
-import Product from "./src/pages/Product.jsx";
+import HowItWorks from "./src/pages/howitworks.jsx";
+import Features from "./src/pages/features.jsx";
+import Product from "./src/pages/product.jsx";
 import Pricing from "./src/pages/Pricing.jsx";
-import Demo from "./src/pages/Demo.jsx";
-import Contact from "./src/pages/Contact.jsx";
+import Demo from "./src/pages/demo.jsx";
+import Contact from "./src/pages/contact.jsx";
 import Integrations from "./src/pages/Integrations.jsx";
 import Login from "./src/pages/Login.jsx";
 import StartFreeTrial from "./src/pages/StartFreeTrial.jsx";
